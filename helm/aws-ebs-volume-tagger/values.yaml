@@ -1,4 +1,4 @@
-name: {APP-NAME}
+name: aws-ebs-volume-tagger
 serviceType: managed
 
 project:
@@ -7,6 +7,8 @@ project:
 
 image:
   registry: quay.io
-  name: giantswarm/{APP-NAME}
+  name: giantswarm/aws-ebs-volume-tagger
   tag: v0.0.1
   pullPolicy: IfNotPresent
+
+schedule: "*/15 * * * *"

@@ -3,15 +3,53 @@ orbs:
   architect: giantswarm/architect@4.8.1
 
 workflows:
-  package-and-push-chart-on-tag:
+  version: 2
+  build:
     jobs:
+      - architect/go-build:
+          name: build-aws-ebs-volume-tagger
+          context: architect
+          binary: aws-ebs-volume-tagger
+          filters:
+            # Do this on every commit and when a new tag is created.
+            tags:
+              only: /^v.*/
+
+      - architect/push-to-docker:
+          name: push-aws-ebs-volume-tagger-to-quay
+          context: architect
+          image: "quay.io/giantswarm/aws-ebs-volume-tagger"
+          username_envar: "QUAY_USERNAME"
+          password_envar: "QUAY_PASSWORD"
+          requires:
+            - build-aws-ebs-volume-tagger
+          # Do this on every commit and when a new tag is created.
+          filters:
+            tags:
+              only: /^v.*/
+
+      - architect/push-to-docker:
+          name: push-aws-ebs-volume-tagger-to-aliyun
+          context: architect
+          image: "registry-intl.cn-shanghai.aliyuncs.com/giantswarm/aws-ebs-volume-tagger"
+          username_envar: "ALIYUN_USERNAME"
+          password_envar: "ALIYUN_PASSWORD"
+          requires:
+            - build-aws-ebs-volume-tagger
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v.*/
+
       - architect/push-to-app-catalog:
           context: "architect"
-          # executor: "app-build-suite" # uncomment this if you want automatic metadata generation and helm chart linting
-          name: "package and push {APP-NAME} chart"
+          name: "package and push aws-ebs-volume-tagger chart"
           app_catalog: "giantswarm-playground-catalog"
           app_catalog_test: "giantswarm-playground-test-catalog"
-          chart: "{APP-NAME}"
+          chart: "aws-ebs-volume-tagger"
+          requires:
+            - push-aws-ebs-volume-tagger-to-quay
           # Trigger job on git tag.
           filters:
             tags:

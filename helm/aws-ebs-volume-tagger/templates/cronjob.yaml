@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    metadata:
+      labels:
+        {{- include "labels.common" . | nindent 8 }}
+    spec:
+      template:
+        metadata:
+          labels:
+            {{- include "labels.common" . | nindent 12 }}
+        spec:
+          containers:
+            - image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+              imagePullPolicy: IfNotPresent
+              name: tagger
+              resources: {}
+          dnsPolicy: ClusterFirst
+          restartPolicy: Never
+          serviceAccountName:  {{ .Release.Name }}
+          terminationGracePeriodSeconds: 30
+  schedule: '{{ .Values.schedule }}'
+  startingDeadlineSeconds: 240
+  successfulJobsHistoryLimit: 1
+  suspend: false
