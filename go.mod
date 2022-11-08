@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/aws/aws-sdk-go-v2 v1.17.1
 	github.com/aws/aws-sdk-go-v2/config v1.2.0
+	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.1.1
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.65.0
 	gopkg.in/yaml.v2 v2.2.8
 	k8s.io/apimachinery v0.18.19
@@ -13,7 +14,6 @@ require (
 
 require (
 	github.com/aws/aws-sdk-go-v2/credentials v1.2.0 // indirect
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.1.1 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.25 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.19 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.0.0 // indirect
