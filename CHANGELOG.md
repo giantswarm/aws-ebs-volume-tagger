@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Use IMDS Region.
+
 ## [0.1.1] - 2022-11-08
 
 ### Fixed
