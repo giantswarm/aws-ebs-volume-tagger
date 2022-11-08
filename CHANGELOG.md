@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2022-11-08
+
 - changed: `app.giantswarm.io` label group was changed to `application.giantswarm.io`
 
-[Unreleased]: https://github.com/giantswarm/{APP-NAME}/tree/main
+[Unreleased]: https://github.com/giantswarm/aws-ebs-volume-tagger/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/giantswarm/aws-ebs-volume-tagger/releases/tag/v0.1.0
