@@ -29,7 +29,7 @@ type Client struct {
 
 const (
 	configNamespace   = "giantswarm"
-	configName        = "test"
+	configName        = "aws-ebs-volume-tagger-chart-values"
 	customerTagPrefix = "tag.provider.giantswarm.io"
 )
 

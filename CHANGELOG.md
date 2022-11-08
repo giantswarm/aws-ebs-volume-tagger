@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix Dockerfile.
+
 ## [0.1.0] - 2022-11-08
 
 - changed: `app.giantswarm.io` label group was changed to `application.giantswarm.io`

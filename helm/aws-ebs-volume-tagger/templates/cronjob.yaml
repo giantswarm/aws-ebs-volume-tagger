@@ -17,6 +17,8 @@ spec:
           labels:
             {{- include "labels.common" . | nindent 12 }}
         spec:
+          nodeSelector:
+            kubernetes.io/role: master
           containers:
             - image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
               imagePullPolicy: IfNotPresent
@@ -26,6 +28,8 @@ spec:
           restartPolicy: Never
           serviceAccountName:  {{ .Release.Name }}
           terminationGracePeriodSeconds: 30
+          tolerations:
+            - operator: Exists
   schedule: '{{ .Values.schedule }}'
   startingDeadlineSeconds: 240
   successfulJobsHistoryLimit: 1
