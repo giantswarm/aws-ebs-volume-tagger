@@ -1,37 +1,45 @@
 version: 2.1
 orbs:
-  architect: giantswarm/architect@4.35.5
+  architect: giantswarm/architect@5.12.1
 
 workflows:
   version: 2
   build:
     jobs:
-      - architect/go-build:
-          name: build-aws-ebs-volume-tagger
-          context: architect
-          binary: aws-ebs-volume-tagger
-          filters:
+    - architect/go-build:
+        name: build-aws-ebs-volume-tagger
+        context: architect
+        binary: aws-ebs-volume-tagger
+        filters:
             # Do this on every commit and when a new tag is created.
-            tags:
-              only: /^v.*/
+          tags:
+            only: /^v.*/
 
-      - architect/push-to-registries:
-          context: architect
-          name: push-to-registries
-          requires:
-            - build-aws-ebs-volume-tagger
-          filters:
-            tags:
-              only: /^v.*/
+    - architect/push-to-registries:
+        context: architect
+        name: push-to-registries
+        requires:
+        - build-aws-ebs-volume-tagger
+        filters:
+          tags:
+            only: /^v.*/
 
-      - architect/push-to-app-catalog:
-          context: "architect"
-          name: "package and push aws-ebs-volume-tagger chart"
-          app_catalog: "giantswarm-playground-catalog"
-          app_catalog_test: "giantswarm-playground-test-catalog"
-          chart: "aws-ebs-volume-tagger"
-          requires:
-            - push-to-registries
-          filters:
-            tags:
-              only: /^v.*/
+          branches:
+            ignore:
+            - main
+            - master
+    - architect/push-to-app-catalog:
+        context: architect
+        name: package and push aws-ebs-volume-tagger chart
+        app_catalog: giantswarm-playground-catalog
+        app_catalog_test: giantswarm-playground-test-catalog
+        chart: aws-ebs-volume-tagger
+        requires:
+        - push-to-registries
+        filters:
+          tags:
+            only: /^v.*/
+          branches:
+            ignore:
+            - main
+            - master
