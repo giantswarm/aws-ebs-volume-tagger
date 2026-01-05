@@ -20,7 +20,7 @@ spec:
           nodeSelector:
             kubernetes.io/role: master
           containers:
-            - image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+            - image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ include "imageTag" . }}"
               imagePullPolicy: IfNotPresent
               name: tagger
               resources: {}

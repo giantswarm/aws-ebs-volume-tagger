@@ -1,4 +1,6 @@
 replace-chart-version-with-git: true
+replace-app-version-with-git: true
 generate-metadata: true
-chart-dir: ./helm/{APP-NAME}
+chart-dir: ./helm/aws-ebs-volume-tagger
 destination: ./build
+catalog-base-url: https://giantswarm.github.io/giantswarm-playground-catalog/
