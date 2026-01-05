@@ -30,6 +30,7 @@ workflows:
             - master
     - architect/push-to-app-catalog:
         context: architect
+        executor: app-build-suite
         name: package and push aws-ebs-volume-tagger chart
         app_catalog: giantswarm-playground-catalog
         app_catalog_test: giantswarm-playground-test-catalog

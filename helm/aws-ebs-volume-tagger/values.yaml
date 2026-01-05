@@ -1,14 +1,10 @@
 name: aws-ebs-volume-tagger
 serviceType: managed
 
-project:
-  branch: "[[ .Branch ]]"
-  commit: "[[ .SHA ]]"
-
 image:
   registry: quay.io
   name: giantswarm/aws-ebs-volume-tagger
-  tag: "[[ .Version ]]"
+  tag: ""
   pullPolicy: IfNotPresent
 
 schedule: "*/15 * * * *"

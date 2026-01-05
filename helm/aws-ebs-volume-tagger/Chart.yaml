@@ -1,8 +1,10 @@
 apiVersion: v2
-appVersion: 0.1.2
 name: aws-ebs-volume-tagger
+version: 0.1.3-dev
+appVersion: 0.1.3-dev
 description: Tags AWS EBS Volumes
-version: [[ .Version ]]
+icon: https://s.giantswarm.io/app-icons/1/png/default-app-light.png
 home: https://github.com/giantswarm/aws-ebs-volume-tagger
 annotations:
   application.giantswarm.io/team: "phoenix"
+  io.giantswarm.application.team: "phoenix"
